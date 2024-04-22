@@ -9,13 +9,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout 🛎️
-        uses: actions/checkout@v2.3.1
+        uses: actions/checkout@v2 # Actualiza la versión de esta acción a v2
 
       - name: Install, lint, build 🔧
         run: |
           npm install
           npm run lint:js
           npm run build
+
+      - name: Set Environment Variables
+        run: |
+          echo "BUILD_VERSION=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@4.1.0
